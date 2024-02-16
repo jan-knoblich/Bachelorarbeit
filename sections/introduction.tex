@@ -1,0 +1,28 @@
+%% LaTeX2e class for student theses
+%% sections/content.tex
+%% 
+%% Karlsruhe Institute of Technology
+%% Institute for Program Structures and Data Organization
+%% Chair for Software Design and Quality (SDQ)
+%%
+%% Dr.-Ing. Erik Burger
+%% burger@kit.edu
+%%
+%% Version 1.4, 2023-06-19
+
+\chapter{Introduction}
+\label{ch:Introduction}
+
+
+Data can usually be in one of three states requiring protection. Proven procedures for the secure transmission and storage of data have existed for some time. In the past, however, it was a challenge to fully protect data from unauthorized access during processing. This situation has changed fundamentally over the last ten years. Confidential computing refers to concepts and technologies that are designed to protect data and applications, even if they are executed on third-party hardware. This thesis focuses on Intel's Trust Domain Extensions (TDX) from 2023, an extension of the Software Guard Extension (SGX) from 2015. These offer developers the option of using hardware-based encryption. In the case of SGX, selected memory areas and application code are isolated; TDX extends this to include hardware-based isolation of the entire virtual machine (VM) from the hypervisor, among other things. 
+A fundamental problem in the security industry is the trade-off between performance and security. For this reason, this bachelor thesis is dedicated to analyzing the impact of using these technologies on the performance of a Large Language Model (LLM). This thesis contributes to this goal by answering the following questions:
+
+Q1: What is the impact of TDX on an applications performance?
+
+Q2: What security assumptions need to be made for a system using TDX or SGX to be secure?
+
+    - What are the impacts if those assumptions are broken? Either by accident or on purpose.
+    
+Q3: Which users can use TDX or SGX to their advantage and in what fields could they be useful?
+
+

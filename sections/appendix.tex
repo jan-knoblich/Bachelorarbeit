@@ -1,0 +1,586 @@
+%% LaTeX2e class for student theses
+%% sections/apendix.tex
+%% 
+%% Karlsruhe Institute of Technology
+%% Institute for Program Structures and Data Organization
+%% Chair for Software Design and Quality (SDQ)
+%%
+%% Dr.-Ing. Erik Burger
+%% burger@kit.edu
+%%
+%% Version 1.4, 2023-06-19
+
+\iflanguage{english}
+{\chapter{Appendix}}    % english style
+{\chapter{Anhang}}      % german style
+\label{chap:appendix}
+
+
+%% -------------------
+%% | Example content |
+%% -------------------
+\section{First Appendix Section}
+\label{sec:appendix:FirstSection}
+		
+\setcounter{figure}{0}
+		
+\begin{figure} [ht]
+  \centering
+  \includegraphics[width=.5\linewidth]{logos/kitlogo_en_cmyk}
+  \caption{A figure}
+  \label{fig:anotherfigure}
+\end{figure}
+
+\section{Code}
+
+\subsection{Benchmark Code}
+
+\section{Benchmark Results}
+\subsection{Roberta Non TD}
+\label{sec:appendix:benchmarks:roberta}
+
+\begin{lstlisting}[language=json]
+Number of benchmarks: 8
+Total duration: 2 hour 57 min 25.7 sec
+Start date: 2023-12-19 05:34:37
+End date: 2023-12-19 14:36:43
+
+Transformer pipe, short sentence, roberta-base
+----------------------------------------------
+
+Total duration: 3 min 45.4 sec
+Start date: 2023-12-19 05:34:37
+End date: 2023-12-19 06:22:10
+Raw value minimum: 1.37 sec
+Raw value maximum: 2.04 sec
+
+Number of calibration run: 1
+Number of run with values: 30
+Total number of run: 31
+
+Number of warmup per run: 1
+Number of value per run: 3
+Loop iterations per value: 5 (1 outer-loop x 5 inner-loops)
+Total number of values: 90
+
+Minimum:         274 ms
+Median +- MAD:   365 ms +- 10 ms
+Mean +- std dev: 361 ms +- 21 ms
+Maximum:         407 ms
+
+  0th percentile: 274 ms (-24% of the mean) -- minimum
+  5th percentile: 323 ms (-11% of the mean)
+ 25th percentile: 354 ms (-2% of the mean) -- Q1
+ 50th percentile: 365 ms (+1% of the mean) -- median
+ 75th percentile: 375 ms (+4% of the mean) -- Q3
+ 95th percentile: 383 ms (+6% of the mean)
+100th percentile: 407 ms (+13% of the mean) -- maximum
+
+Number of outlier (out of 322 ms..407 ms): 6
+
+Transformer pipe, long sentence, roberta-base
+---------------------------------------------
+
+Total duration: 6 min 42.5 sec
+Start date: 2023-12-19 06:23:52
+End date: 2023-12-19 07:14:45
+Raw value minimum: 2.86 sec
+Raw value maximum: 3.73 sec
+
+Number of calibration run: 1
+Number of run with values: 30
+Total number of run: 31
+
+Number of warmup per run: 1
+Number of value per run: 3
+Loop iterations per value: 5 (1 outer-loop x 5 inner-loops)
+Total number of values: 90
+
+Minimum:         571 ms
+Median +- MAD:   669 ms +- 31 ms
+Mean +- std dev: 661 ms +- 44 ms
+Maximum:         746 ms
+
+  0th percentile: 571 ms (-14% of the mean) -- minimum
+  5th percentile: 593 ms (-10% of the mean)
+ 25th percentile: 617 ms (-7% of the mean) -- Q1
+ 50th percentile: 669 ms (+1% of the mean) -- median
+ 75th percentile: 695 ms (+5% of the mean) -- Q3
+ 95th percentile: 724 ms (+9% of the mean)
+100th percentile: 746 ms (+13% of the mean) -- maximum
+
+Number of outlier (out of 500 ms..811 ms): 0
+
+Transformer pipe, short sentence array, roberta-base
+----------------------------------------------------
+
+Total duration: 30 min 17.6 sec
+Start date: 2023-12-19 07:17:33
+End date: 2023-12-19 08:32:20
+Raw value minimum: 12.8 sec
+Raw value maximum: 16.2 sec
+
+Number of calibration run: 1
+Number of run with values: 30
+Total number of run: 31
+
+Number of warmup per run: 1
+Number of value per run: 3
+Loop iterations per value: 5 (1 outer-loop x 5 inner-loops)
+Total number of values: 90
+
+Minimum:         2.55 sec
+Median +- MAD:   2.95 sec +- 0.10 sec
+Mean +- std dev: 2.94 sec +- 0.16 sec
+Maximum:         3.25 sec
+
+  0th percentile: 2.55 sec (-13% of the mean) -- minimum
+  5th percentile: 2.67 sec (-9% of the mean)
+ 25th percentile: 2.84 sec (-3% of the mean) -- Q1
+ 50th percentile: 2.95 sec (+0% of the mean) -- median
+ 75th percentile: 3.05 sec (+4% of the mean) -- Q3
+ 95th percentile: 3.21 sec (+9% of the mean)
+100th percentile: 3.25 sec (+10% of the mean) -- maximum
+
+Number of outlier (out of 2.54 sec..3.36 sec): 0
+
+Transformer pipe, long sentence array, roberta-base
+---------------------------------------------------
+
+Total duration: 56 min 21.3 sec
+Start date: 2023-12-19 08:35:33
+End date: 2023-12-19 10:15:29
+Raw value minimum: 24.7 sec
+Raw value maximum: 30.5 sec
+
+Number of calibration run: 1
+Number of run with values: 30
+Total number of run: 31
+
+Number of warmup per run: 1
+Number of value per run: 3
+Loop iterations per value: 5 (1 outer-loop x 5 inner-loops)
+Total number of values: 90
+
+Minimum:         4.94 sec
+Median +- MAD:   5.49 sec +- 0.16 sec
+Mean +- std dev: 5.48 sec +- 0.23 sec
+Maximum:         6.09 sec
+
+  0th percentile: 4.94 sec (-10% of the mean) -- minimum
+  5th percentile: 5.16 sec (-6% of the mean)
+ 25th percentile: 5.32 sec (-3% of the mean) -- Q1
+ 50th percentile: 5.49 sec (+0% of the mean) -- median
+ 75th percentile: 5.64 sec (+3% of the mean) -- Q3
+ 95th percentile: 5.83 sec (+6% of the mean)
+100th percentile: 6.09 sec (+11% of the mean) -- maximum
+
+Number of outlier (out of 4.83 sec..6.13 sec): 0
+
+AMX pipe, short sentence, roberta-base
+--------------------------------------
+
+Total duration: 2 min 35.2 sec
+Start date: 2023-12-19 10:15:15
+End date: 2023-12-19 11:01:19
+Raw value minimum: 1.15 sec
+Raw value maximum: 1.39 sec
+
+Number of calibration run: 1
+Number of run with values: 30
+Total number of run: 31
+
+Number of warmup per run: 1
+Number of value per run: 3
+Loop iterations per value: 5 (1 outer-loop x 5 inner-loops)
+Total number of values: 90
+
+Minimum:         231 ms
+Median +- MAD:   248 ms +- 10 ms
+Mean +- std dev: 249 ms +- 13 ms
+Maximum:         278 ms
+
+  0th percentile: 231 ms (-7% of the mean) -- minimum
+  5th percentile: 232 ms (-7% of the mean)
+ 25th percentile: 238 ms (-4% of the mean) -- Q1
+ 50th percentile: 248 ms (-0% of the mean) -- median
+ 75th percentile: 257 ms (+3% of the mean) -- Q3
+ 95th percentile: 274 ms (+10% of the mean)
+100th percentile: 278 ms (+12% of the mean) -- maximum
+
+Number of outlier (out of 209 ms..286 ms): 0
+
+AMX pipe, long sentence, roberta-base
+-------------------------------------
+
+Total duration: 6 min 25.9 sec
+Start date: 2023-12-19 11:03:00
+End date: 2023-12-19 11:53:03
+Raw value minimum: 2.92 sec
+Raw value maximum: 3.40 sec
+
+Number of calibration run: 1
+Number of run with values: 30
+Total number of run: 31
+
+Number of warmup per run: 1
+Number of value per run: 3
+Loop iterations per value: 5 (1 outer-loop x 5 inner-loops)
+Total number of values: 90
+
+Minimum:         583 ms
+Median +- MAD:   622 ms +- 9 ms
+Mean +- std dev: 623 ms +- 19 ms
+Maximum:         680 ms
+
+  0th percentile: 583 ms (-6% of the mean) -- minimum
+  5th percentile: 594 ms (-5% of the mean)
+ 25th percentile: 613 ms (-2% of the mean) -- Q1
+ 50th percentile: 622 ms (-0% of the mean) -- median
+ 75th percentile: 632 ms (+1% of the mean) -- Q3
+ 95th percentile: 654 ms (+5% of the mean)
+100th percentile: 680 ms (+9% of the mean) -- maximum
+
+Number of outlier (out of 585 ms..660 ms): 7
+
+AMX pipe, short sentence array, roberta-base
+--------------------------------------------
+
+Total duration: 20 min 38.7 sec
+Start date: 2023-12-19 11:55:23
+End date: 2023-12-19 12:58:20
+Raw value minimum: 9.28 sec
+Raw value maximum: 10.8 sec
+
+Number of calibration run: 1
+Number of run with values: 30
+Total number of run: 31
+
+Number of warmup per run: 1
+Number of value per run: 3
+Loop iterations per value: 5 (1 outer-loop x 5 inner-loops)
+Total number of values: 90
+
+Minimum:         1.86 sec
+Median +- MAD:   1.98 sec +- 0.04 sec
+Mean +- std dev: 1.98 sec +- 0.07 sec
+Maximum:         2.16 sec
+
+  0th percentile: 1.86 sec (-6% of the mean) -- minimum
+  5th percentile: 1.88 sec (-5% of the mean)
+ 25th percentile: 1.94 sec (-2% of the mean) -- Q1
+ 50th percentile: 1.98 sec (-0% of the mean) -- median
+ 75th percentile: 2.03 sec (+2% of the mean) -- Q3
+ 95th percentile: 2.10 sec (+6% of the mean)
+100th percentile: 2.16 sec (+9% of the mean) -- maximum
+
+Number of outlier (out of 1.80 sec..2.16 sec): 0
+
+AMX pipe, long sentence array, roberta-base
+-------------------------------------------
+
+Total duration: 50 min 39.0 sec
+Start date: 2023-12-19 13:01:24
+End date: 2023-12-19 14:36:43
+Raw value minimum: 21.8 sec
+Raw value maximum: 26.4 sec
+
+Number of calibration run: 1
+Number of run with values: 30
+Total number of run: 31
+
+Number of warmup per run: 1
+Number of value per run: 3
+Loop iterations per value: 5 (1 outer-loop x 5 inner-loops)
+Total number of values: 90
+
+Minimum:         4.37 sec
+Median +- MAD:   4.92 sec +- 0.10 sec
+Mean +- std dev: 4.89 sec +- 0.16 sec
+Maximum:         5.27 sec
+
+  0th percentile: 4.37 sec (-11% of the mean) -- minimum
+  5th percentile: 4.63 sec (-5% of the mean)
+ 25th percentile: 4.80 sec (-2% of the mean) -- Q1
+ 50th percentile: 4.92 sec (+0% of the mean) -- median
+ 75th percentile: 5.00 sec (+2% of the mean) -- Q3
+ 95th percentile: 5.11 sec (+4% of the mean)
+100th percentile: 5.27 sec (+8% of the mean) -- maximum
+\end{lstlisting}
+
+\subsection{Roberta TD}
+\begin{lstlisting}[language=json]
+Number of benchmarks: 8
+Total duration: 2 hour 59 min 0.6 sec
+Start date: 2023-12-19 05:32:58
+End date: 2023-12-19 14:37:09
+
+Transformer pipe, short sentence, roberta-base
+----------------------------------------------
+
+Total duration: 3 min 53.6 sec
+Start date: 2023-12-19 05:32:58
+End date: 2023-12-19 06:20:59
+Raw value minimum: 1.44 sec
+Raw value maximum: 2.23 sec
+
+Number of calibration run: 1
+Number of run with values: 30
+Total number of run: 31
+
+Number of warmup per run: 1
+Number of value per run: 3
+Loop iterations per value: 5 (1 outer-loop x 5 inner-loops)
+Total number of values: 90
+
+Minimum:         288 ms
+Median +- MAD:   383 ms +- 15 ms
+Mean +- std dev: 378 ms +- 26 ms
+Maximum:         446 ms
+
+  0th percentile: 288 ms (-24% of the mean) -- minimum
+  5th percentile: 343 ms (-9% of the mean)
+ 25th percentile: 365 ms (-3% of the mean) -- Q1
+ 50th percentile: 383 ms (+1% of the mean) -- median
+ 75th percentile: 393 ms (+4% of the mean) -- Q3
+ 95th percentile: 412 ms (+9% of the mean)
+100th percentile: 446 ms (+18% of the mean) -- maximum
+
+Number of outlier (out of 321 ms..437 ms): 4
+
+Transformer pipe, long sentence, roberta-base
+---------------------------------------------
+
+Total duration: 7 min 8.4 sec
+Start date: 2023-12-19 06:22:43
+End date: 2023-12-19 07:13:48
+Raw value minimum: 3.20 sec
+Raw value maximum: 3.78 sec
+
+Number of calibration run: 1
+Number of run with values: 30
+Total number of run: 31
+
+Number of warmup per run: 1
+Number of value per run: 3
+Loop iterations per value: 5 (1 outer-loop x 5 inner-loops)
+Total number of values: 90
+
+Minimum:         640 ms
+Median +- MAD:   692 ms +- 16 ms
+Mean +- std dev: 690 ms +- 25 ms
+Maximum:         756 ms
+
+  0th percentile: 640 ms (-7% of the mean) -- minimum
+  5th percentile: 645 ms (-7% of the mean)
+ 25th percentile: 673 ms (-2% of the mean) -- Q1
+ 50th percentile: 692 ms (+0% of the mean) -- median
+ 75th percentile: 706 ms (+2% of the mean) -- Q3
+ 95th percentile: 727 ms (+5% of the mean)
+100th percentile: 756 ms (+10% of the mean) -- maximum
+
+Number of outlier (out of 623 ms..756 ms): 0
+
+Transformer pipe, short sentence array, roberta-base
+----------------------------------------------------
+
+Total duration: 31 min 27.1 sec
+Start date: 2023-12-19 07:16:26
+End date: 2023-12-19 08:32:55
+Raw value minimum: 13.4 sec
+Raw value maximum: 16.8 sec
+
+Number of calibration run: 1
+Number of run with values: 30
+Total number of run: 31
+
+Number of warmup per run: 1
+Number of value per run: 3
+Loop iterations per value: 5 (1 outer-loop x 5 inner-loops)
+Total number of values: 90
+
+Minimum:         2.68 sec
+Median +- MAD:   3.05 sec +- 0.10 sec
+Mean +- std dev: 3.05 sec +- 0.15 sec
+Maximum:         3.37 sec
+
+  0th percentile: 2.68 sec (-12% of the mean) -- minimum
+  5th percentile: 2.81 sec (-8% of the mean)
+ 25th percentile: 2.97 sec (-3% of the mean) -- Q1
+ 50th percentile: 3.05 sec (-0% of the mean) -- median
+ 75th percentile: 3.16 sec (+3% of the mean) -- Q3
+ 95th percentile: 3.27 sec (+7% of the mean)
+100th percentile: 3.37 sec (+10% of the mean) -- maximum
+
+Number of outlier (out of 2.70 sec..3.44 sec): 1
+
+Transformer pipe, long sentence array, roberta-base
+---------------------------------------------------
+
+Total duration: 57 min 47.0 sec
+Start date: 2023-12-19 08:36:09
+End date: 2023-12-19 10:18:22
+Raw value minimum: 25.5 sec
+Raw value maximum: 31.6 sec
+
+Number of calibration run: 1
+Number of run with values: 30
+Total number of run: 31
+
+Number of warmup per run: 1
+Number of value per run: 3
+Loop iterations per value: 5 (1 outer-loop x 5 inner-loops)
+Total number of values: 90
+
+Minimum:         5.11 sec
+Median +- MAD:   5.58 sec +- 0.22 sec
+Mean +- std dev: 5.62 sec +- 0.28 sec
+Maximum:         6.33 sec
+
+  0th percentile: 5.11 sec (-9% of the mean) -- minimum
+  5th percentile: 5.24 sec (-7% of the mean)
+ 25th percentile: 5.40 sec (-4% of the mean) -- Q1
+ 50th percentile: 5.58 sec (-1% of the mean) -- median
+ 75th percentile: 5.85 sec (+4% of the mean) -- Q3
+ 95th percentile: 6.05 sec (+8% of the mean)
+100th percentile: 6.33 sec (+13% of the mean) -- maximum
+
+Number of outlier (out of 4.73 sec..6.52 sec): 0
+
+AMX pipe, short sentence, roberta-base
+--------------------------------------
+
+Total duration: 2 min 31.3 sec
+Start date: 2023-12-19 10:18:10
+End date: 2023-12-19 11:04:14
+Raw value minimum: 1.12 sec
+Raw value maximum: 1.44 sec
+
+Number of calibration run: 1
+Number of run with values: 30
+Total number of run: 31
+
+Number of warmup per run: 1
+Number of value per run: 3
+Loop iterations per value: 5 (1 outer-loop x 5 inner-loops)
+Total number of values: 90
+
+Minimum:         225 ms
+Median +- MAD:   240 ms +- 4 ms
+Mean +- std dev: 241 ms +- 11 ms
+Maximum:         287 ms
+
+  0th percentile: 225 ms (-7% of the mean) -- minimum
+  5th percentile: 229 ms (-5% of the mean)
+ 25th percentile: 235 ms (-2% of the mean) -- Q1
+ 50th percentile: 240 ms (-1% of the mean) -- median
+ 75th percentile: 243 ms (+1% of the mean) -- Q3
+ 95th percentile: 271 ms (+13% of the mean)
+100th percentile: 287 ms (+19% of the mean) -- maximum
+
+Number of outlier (out of 224 ms..254 ms): 6
+
+AMX pipe, long sentence, roberta-base
+-------------------------------------
+
+Total duration: 6 min 9.6 sec
+Start date: 2023-12-19 11:05:54
+End date: 2023-12-19 11:55:49
+Raw value minimum: 2.81 sec
+Raw value maximum: 3.22 sec
+
+Number of calibration run: 1
+Number of run with values: 30
+Total number of run: 31
+
+Number of warmup per run: 1
+Number of value per run: 3
+Loop iterations per value: 5 (1 outer-loop x 5 inner-loops)
+Total number of values: 90
+
+Minimum:         561 ms
+Median +- MAD:   594 ms +- 8 ms
+Mean +- std dev: 594 ms +- 15 ms
+Maximum:         644 ms
+
+  0th percentile: 561 ms (-6% of the mean) -- minimum
+  5th percentile: 568 ms (-4% of the mean)
+ 25th percentile: 585 ms (-2% of the mean) -- Q1
+ 50th percentile: 594 ms (+0% of the mean) -- median
+ 75th percentile: 602 ms (+1% of the mean) -- Q3
+ 95th percentile: 621 ms (+4% of the mean)
+100th percentile: 644 ms (+8% of the mean) -- maximum
+
+Number of outlier (out of 560 ms..627 ms): 2
+
+AMX pipe, short sentence array, roberta-base
+--------------------------------------------
+
+Total duration: 20 min 46.5 sec
+Start date: 2023-12-19 11:58:01
+End date: 2023-12-19 13:01:05
+Raw value minimum: 9.09 sec
+Raw value maximum: 11.3 sec
+
+Number of calibration run: 1
+Number of run with values: 30
+Total number of run: 31
+
+Number of warmup per run: 1
+Number of value per run: 3
+Loop iterations per value: 5 (1 outer-loop x 5 inner-loops)
+Total number of values: 90
+
+Minimum:         1.82 sec
+Median +- MAD:   2.04 sec +- 0.04 sec
+Mean +- std dev: 2.03 sec +- 0.08 sec
+Maximum:         2.27 sec
+
+  0th percentile: 1.82 sec (-10% of the mean) -- minimum
+  5th percentile: 1.91 sec (-6% of the mean)
+ 25th percentile: 1.99 sec (-2% of the mean) -- Q1
+ 50th percentile: 2.04 sec (+0% of the mean) -- median
+ 75th percentile: 2.07 sec (+2% of the mean) -- Q3
+ 95th percentile: 2.16 sec (+7% of the mean)
+100th percentile: 2.27 sec (+12% of the mean) -- maximum
+
+Number of outlier (out of 1.87 sec..2.18 sec): 4
+
+AMX pipe, long sentence array, roberta-base
+-------------------------------------------
+
+Total duration: 49 min 17.0 sec
+Start date: 2023-12-19 13:04:16
+End date: 2023-12-19 14:37:09
+Raw value minimum: 17.2 sec
+Raw value maximum: 25.5 sec
+
+Number of calibration run: 1
+Number of run with values: 30
+Total number of run: 31
+
+Number of warmup per run: 1
+Number of value per run: 3
+Loop iterations per value: 5 (1 outer-loop x 5 inner-loops)
+Total number of values: 90
+
+Minimum:         3.43 sec
+Median +- MAD:   4.83 sec +- 0.10 sec
+Mean +- std dev: 4.76 sec +- 0.29 sec
+Maximum:         5.10 sec
+
+  0th percentile: 3.43 sec (-28% of the mean) -- minimum
+  5th percentile: 4.40 sec (-8% of the mean)
+ 25th percentile: 4.73 sec (-1% of the mean) -- Q1
+ 50th percentile: 4.83 sec (+1% of the mean) -- median
+ 75th percentile: 4.93 sec (+3% of the mean) -- Q3
+ 95th percentile: 5.04 sec (+6% of the mean)
+100th percentile: 5.10 sec (+7% of the mean) -- maximum
+
+Number of outlier (out of 4.42 sec..5.23 sec): 6
+\end{lstlisting}
+
+\dots
+%% ---------------------
+%% | / Example content |
+%% ---------------------

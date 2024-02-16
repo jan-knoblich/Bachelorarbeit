@@ -1,0 +1,121 @@
+%% LaTeX2e class for student theses
+%% sections/evaluation.tex
+%% 
+%% Karlsruhe Institute of Technology
+%% Institute for Program Structures and Data Organization
+%% Chair for Software Design and Quality (SDQ)
+%%
+%% Dr.-Ing. Erik Burger
+%% burger@kit.edu
+%%
+%% Version 1.4, 2023-06-19
+
+\chapter{Evaluation}
+\label{ch:Evaluation}
+
+\section{Benchmark Results}
+
+\todo{General Benchmark results}
+The Benchmark results using distilBERT-base-uncased show a small performance loss of 2\% from a TD VM to a Non-TD VM. The performance difference fluctuates between the non-TD VM being 3\% slower on the long sentence array transformer pipe to being 5\% faster on the long sentence AMX pipe. Half the benchmarks did not have a t-value that make them significant. For this test the 30 run times were run 3 times for a total of 90 test runs per benchmark. The AMX variant was on average 29\% faster with the differences ranging from 19\% to 50\% faster.
+These differences can be seen using MAD and mean and standard deviation, meaning they are not only due to outliers. The first benchmarks had the TD VM about 18\% faster on average. This unexpected result meant running the tests two more times to remove any potential noises in the system. These closed the gap overall but only one suite had the expected outcome of the Non-TD VM running faster. See \ref{sec:appendix:benchmarks:bert} for the full results and \todo{add online archive for .json}.
+
+The benchmark results using RoBERTa show a small performance loss of on average 1\% from a non-TD VM to a TD VM. The performance differs from about 5\% faster to 5\% slower. Each result was checked for significance using Student’s two-sample, two-tailed t-test with an alpha equal to 0.95. The absolute t-values range from 3.79 to 11.28. With 30 runs per test this results in p-values far below 0.01. Every result except 2 was faster on non-TD VMs. The AMX accelerated pipe was faster on the TD vm on the short sentence array and long sentences\todo{why}. So while theses tests are statistically significant the difference in speed is not significant for real-world applications. AMX vs Non-AMX showed a speed increase of about 30\% in this benchmark, this is in line with the expected 1/3 speed increase.
+The full Benchmark results can be found in the Appendix \ref{sec:appendix:benchmarks:roberta}.
+
+Both of the previous tests were done using an additional layer using a QEMU VM. Running the same benchmarks on the Host system directly averages an improvement of about 10\%. 
+Due to the small margin between non-TD VMs and TD VM it was decided to test what disabling all TDX-related BIOS settings \cite{getting-started} would have as an impact. This showed a significant speedup of on average 24\% using distillbert and 44\% using Roberta. The highest speed-up with 78\% was observed on the short-sentence array using Roberta. The difference was measurably slower using the AMX pipe with the distilbert TDX-enabled AMX pipe on the long-sentence being 5\% faster even. This difference was still inside the standard deviation, so could reasonably be explained with variations in testing. On average the non-AMX benchmarks were 53\% faster using distillbert and 71\% faster using Roberta. Figure \ref{fig:distillbertMADNONAMX} clearly shows the speed difference after disabling TDX in the BIOS. 
+\begin{figure}
+   \centering
+       \includegraphics[width=.95\textwidth]{figures/distillbertMAD.png} 
+ \caption{Test}
+ \label{fig:distillbertMADNONAMX}
+\end{figure}
+On the other hand Figure \ref{fig:distillbertMADAMX} shows no measurable speed difference after disabling TDX using the AMX-enabled Benchmarks. 
+\begin{figure}
+   \centering
+       \includegraphics[width=.95\textwidth]{figures/distillbertMADAMX.png} 
+ \caption{Test}
+ \label{fig:distillbertMADAMX}
+\end{figure}
+The AMX benchmarks were, using the geometric mean, similar in speed using distillbert, with a difference that was not statistically significant. The AMX benchmarks using Roberta were about 21\% faster \todo{Roberta AMX results}. The overall speed-up was measurably faster than the initial observed AMX speedup, which indicates that this is not due to the omission of AMX in general but something different but having no speed-up using AMX with distillbert was an interesting result. \todo{herausfinden warum}
+All prior tests were done using Ubuntu 22.04 and the next were done using Ubuntu 23.10 (from here on Ubuntu 23), because of instability issues. Rerunning the same tests using Ubuntu 23 the observed speed-up from a TD to TDX disabled diminished to just about 3\% with just TDX disabled and then an additional 3\% with memory-encryption disabled as well. These differences were small but the MAD on the measurements was even smaller, as can be seen in Figure \ref{fig:distillbertAMXUbuntu23} \ref{fig:distillbertAMXUbuntu23}. 
+\begin{figure}
+   \centering
+       \includegraphics[width=.95\textwidth]{figures/inferencedistillberMADUbuntu23AMX.png} 
+ \caption{Distillbert Inference times on Ubuntu 23 and Sapphire Rapid CPUs.}
+ \label{fig:distillbertAMXUbuntu23}
+\end{figure}
+A further examination was conducted on discernible execution time differences using a profiler on Ubuntu 23, but with just an eight percent speed difference, there wasn't much to observe. \todo{Profiler Analyse} Minus the speed overhead of the profiler which was measured to be about 10 seconds, no matter the platform, the execution took between 77 and 85 seconds, with the highest being TDX and memory encryption bypass enabled, which supposedly speeds up calculations, so assuming no impact here, the margin of error has to be at least the difference between memory encryption bypass enabled and disabled benchmarks, which is about two seconds or 2.5 percent. So no useful overall differences can be observed but some internal methods display significant differences. Intels Extension For Pytorch (IPEX) optimizer copy method saw timing increases of up to 400\%, this seems to be entirely due to activating TDX, as without TDX the timings were all within one percent of each other, enabling TDX without memory bypass increased this time by about 100\% and enabling bypass increases this a further 250\%. Total times for this IPEX optimization instruction can be seen in \ref{tab:IpexOpti}. The IPEX "replacement" method for linear transformation which takes most of the calculations shows small speed differences of about 5\% - in line with the rest. Almost all of the remaining speed differences came from basic linear transformation as well as the other methods called by the models. They show speed increases of about 5\% each.
+Having a look at the profiler results on the Azure cloud there are no clear results on overall speed but noticeably the IPEX copy and optimize instructions were once again measurably slower on the TD compared to a non-TD VM the optimization took about 20\% longer on the TD. This slow down is almost completely due to the time PyTorches clone function takes, which saw increases of 1000\% in total and per call time. Memory encryption itself had close to no impact on the speed here. Neither did the Memory Encryption Bypass. Looking into the implementation of this function this is not expected. Clone creates shallow copies of a tensor, with the lower hierarchy memory being shared. With both the original and the copy being situated inside the TD, this should have at most the same overhead as raw memory access which is outlined in \ref{tab:MemoryAccessSpeed}.
+\begin{table}
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{ m{0.2\textwidth} m{0.2\textwidth} m{0.2\textwidth} m{0.2\textwidth} m{0.2\textwidth} m{0.2\textwidth}}
+\toprule
+& TD with ME Bypass & TD without ME Bypass & No-TD with ME & No-TD with ME Bypass & No Memory Encryption \\
+\midrule
+IPEX optimize total time & 1.21s & 0.597s & 0.28s & 0.278s & 0.284s \\
+\midrule
+PyTorch clone method & 1.01s & 0.397s & 0.079s & 0.077s & 0.077s \\
+\bottomrule
+\end{tabular}
+}
+\caption{Comparison of different timings of IPEX optimization method}
+\label{tab:IpexOpti}
+\end{table}
+
+Looking further into Host and Guest implementations of TDX on specific Ubuntu versions was deemed too much for this thesis.
+
+\subsection{Finding the slow down}
+
+As stated in the previous section there were significant speed differences between having TDX enabled and disabled in the Bios but basically none when TDX was enabled in the Bios but disabled in the VM. Further investigations into what causes these speed-ups were thus necessary. As stated in \ref{sec:tdxBuildingBlocks} there were essentially three functionalities that could be tested independently from TDX:
+\begin{itemize}
+    \item Total Memory Encryption 
+    \item Intel VT, virtualization features
+    \item Intel SGX
+\end{itemize}
+
+They were tested in the order outlined here.
+For Total Memory Encryption, TDX and SGX were disabled, while Intel VT remained turned on. Stream \cite{StreamPaper} and "PerformanceTest" \cite{PerformanceTest} were used for benchmarking. Stream is the de facto standard for memory speed testing and PerformanceTest is a commonly used proprietary tool used to compare memory access. Using PerformanceTest there were small but measurable differences in latency of about 5\% and 2.5\% for reading speed. Writing speed stayed within 1\% of one another.
+\begin{table}
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{ m{0.37\textwidth} m{0.25\textwidth} m{0.25\textwidth} m{0.13\textwidth}}
+\toprule
+Memory Benchmark Type & Memory encryption activated & Memory encryption deactivated & Difference \\
+\midrule
+Memory Allocation MB/s & 32445.11 & 33258.94 & 2.5\% \\
+\midrule
+Memory Read Cached MB/s & 27683.36 & 28148.14 & 1.6\% \\
+\midrule
+Memory Read Uncached MB/s & 10879.98 & 11123.77 & 2.2\% \\
+\midrule
+Memory Write Medium MB/s & 9592.82 & 9549.92 & -0.4\% \\
+\midrule
+Memory Write Threaded MB/s & 400550.9 & 411297.5 & 2.6\% \\
+\midrule
+Memory Latency ns & 64.3 & 61.4 & -4.5\% \\
+\bottomrule
+\end{tabular}
+}
+\caption{Results of Performancetests memory benchmark}
+\label{tab:MemoryAccessSpeed}
+\end{table}
+
+With Stream, everything was tested disabled, just Memory Encryption enabled, and TDX completely enabled, and all three were within two percent of one another, with the encrypted memory being slightly faster than the other two. These results are most likely due to background noise of the system. \ref{fig:STREAM full results}
+
+\begin{table}[]
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{m{0.2\textwidth} m{0.2\textwidth} m{0.2\textwidth} m{0.2\textwidth} m{0.2\textwidth} m{0.2\textwidth}}
+    \hline
+        Function & Best Rate MB/s Encrypted & Best Rate MB/s TDX enabled & Best Rate MB/s unencrypted & Best Rate Legacy VM MB/s & Best Rate TD MB/s \\ \hline
+        Copy: & 292927.7 & 296714.7 & 292686.3 & 228281.2 & 209348.5979 \\ \hline
+        Scale: & 291833.5 & 296603.3 & 293131.2 & 225828 & 206950.9938 \\ \hline
+        Add: & 324643.9 & 318742.3 & 317304.6 & 250686.5 & 221401.8875 \\ \hline
+        Triad: & 315635.1 & 329435.5 & 314132 & 232469.4 & 225711.5192 \\ \hline
+        Normalized Geometric Mean & 1.418 & 1.437 & 1.410 & 1.085 & 1.000 \\ \hline
+    \end{tabular}
+    }
+    \caption{Comparison of Memory Access speed using STREAM for various Non-VM settings as well as legacy VMs and TD}
+\end{table}
