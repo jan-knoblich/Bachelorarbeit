@@ -48,7 +48,7 @@ Intel has published a white paper \cite{noauthor_tdx-whitepaper-february2022pdf_
     \item Intel CPU Hardware
     \cite{aktas_intel_nodate}
 \end{itemize}
-All other system components are outside of the TCB, including the BIOS, SMM, host OS, and the VMM. Some physical attacks such as cold-boot and DRAM traffic are also supposedly protected against. If not stated otherwise the following chapter is paraphrased from \cite{aktas_intel_nodate} This threat model also assumes the KVM/Qemu to be the hypervisor running the protected TDX guest.
+All other system components are outside of the TCB, including the BIOS, SMM, host OS, and the VMM. Some physical attacks such as cold-boot and DRAM traffic are also supposedly protected against. A lot of information in this chapter comes from Aktas et Al. security analysis\cite{aktas_intel_nodate}. This threat model also assumes the KVM/Qemu to be the hypervisor running the protected TDX guest.
 
 \subsection{Adversarial Goals}
 An attacker targeting TDX or a TD directly can focus on different components, depending on what their goals are. In general, they would be interested in leaking sensitive data or disrupting the expected behavior of a TD. 
@@ -88,28 +88,30 @@ The TDX module is the central privileged software component for running confiden
 
 \myparagraph{Outside connection to the TD}
 
-The last major interface is the outside connection to the TD. Here two different problems arise. Firstly transport data security. Making sure that data is not compromised in transit is technically not part of the threats TDX wants to protect against and it does not do that. The second issue that comes up is making sure that communication is done with the correct TD. TD identity checking is explicitly outside the scope of TDX but it can help with that.
-
-
-\section{Security assumptions/solutions} \todo{title}
-\todo{Public Key in Image -> MRTD Hash}
-\todo{How to verify MRTD}
-
-The TDX attestation only guarantees that somewhere a TD runs on certified hardware with a signed TDX Module version. Additional information the Quote can supply is a hash of the image, which source code can then be checked if necessary. This does not however prevent the most basic attacks, for example a man-in-the-middle attack, as shown in Figure \ref{fig:man_in_the_middle}.
+The last major interface is the outside connection to the TD. Here two different problems arise. Firstly transport data security. Making sure that data is not compromised in transit is technically not part of the threats TDX wants to protect against and it does not do that but it will be a major concern of this thesis. The second issue that comes up is making sure that communication is done with the correct TD. TD identity checking is explicitly outside the scope of TDX but it can help with that and this will be another concern in this thesis. The TDX attestation only guarantees that somewhere a TD runs on certified hardware with a signed TDX Module version. Additional information the Quote can supply will be needed to identify a TD. An exemplary man in the middle attack is shown in \ref{fig:man_in_the_middle}.
 \begin{figure}
    \centering
        \includegraphics[width=.75\textwidth]{figures/Man-In-The-Middle.png} 
  \caption{Test}
  \label{fig:man_in_the_middle}
 \end{figure}
+
+
+
+\section{Security assumptions/solutions} \todo{title}
+\todo{Public Key in Image -> MRTD Hash}
+\todo{How to verify MRTD}
+
+Going forward I propose three different ways to establish a secure connection, which get increasingly more complex, while reducing security assumptions and increasing adherence to best practices.
+
 \myparagraph{Verifying the TD identity from a quote}
 
 \label{Identity}
-Similarly to SGX, with TDX the quote contains information on the startup environment of the TD. The Measurement of Trust Domain (MRTD) registers contain information on the initial state of the TD immediately after startup \cite{DCAP}. The Runtime Measurement Registers (RTMR) are written during the runtime, Intel recommends writing information about the virtual firmware configuration in RTMR[0] and information about the OS kernel and boot parameters in RTMR[1] \todo{Does DCAP verify those?}. Additionally the Quote can contain informal data in the \textbf{REPORTDATA} field, which could for example contain hashes about the current state of the filesystem or a nonce. Comparing the expected state of the TD with the real state has to be additionally done by the developer.  
+Similarly to SGX, with TDX the quote contains information on the startup environment of the TD. The Measurement of Trust Domain (MRTD) registers contain information on the initial state of the TD immediately after startup \cite{DCAP}. The Runtime Measurement Registers (RTMR) are written during the runtime, Intel recommends writing information about the virtual firmware configuration in RTMR[0] and information about the OS kernel and boot parameters in RTMR[1] \todo{Does DCAP verify those?}. Additionally the Quote can contain informal data in the \textbf{REPORTDATA} field, which could for example contain hashes about the current state of the filesystem or a nonce. The developer has to compare the expected state of the TD with the real state themself.
 
 \subsection{Establishing a secure connection to the TD}
 \label{Establishing_a_secure_connection}
-\todo{Das geht nicht}After creation the TD contains a previously supplied public key. This public key can either be put into the image before creation or after. If this is done after, this means that the cloud provider has access via some backdoor to the TD and security is not guaranteed, this can be retraced by comparing the startup measurements of the TD with self calculated ones. If these match an empty image, there is a backdoor, if they match an image with just your public key in it, then the image is verified and SSH access to that image can only be done by you. This also means that it is no longer possible to fake the man in the middle attack in Figure \ref{fig:man_in_the_middle} because the attacker, would not have access to the same TD. This form of secure communication relies on the fact that only one public key is in the TD and thus the initial communication channel is secure. If somehow the initial communication channel can be compromised this is no longer secure.
+\todo{Das geht nicht}After creation the TD contains a previously supplied public key. This public key can either be put into the image before creation or after. If this is done after, this means that the cloud provider has unmonitored acces to the TD and security is not guaranteed, this can be retraced by comparing the startup measurements of the TD with self calculated ones. If these match an empty image, there is a backdoor, if they match an image with just your public key in it, then the image is verified and SSH access to that image can only be done by you. This also means that it is no longer possible to fake the man in the middle attack in Figure \ref{fig:man_in_the_middle} because the attacker, would not have access to the same TD. This form of secure communication relies on the fact that only one public key is in the TD and thus the initial communication channel is secure. If somehow the initial communication channel can be compromised this is no longer secure. While theoretically secure, this relies on the assumption that the public key is not extractable from the image. QEMU and by extension TDX uses .qcow2 images, which can be encrypted and using a key management service, which is an additional trusted party, be decrypted on startup. If done using a cloud provider, they have to support this 
 According to \cite{cheng_intel_2023} TDX and SGX can establish secure channels via SSL in a similar way:
 In a typical scenario, when a client negotiates a secure channel with a server running in a TD, it aims to ensure a connection with a server that has been properly instantiated. The server, acting as an attester, generates a pair of ephemeral public and private keys. It calculates the hash of the public key and creates a TD report that includes this hash as the \textbf{REPORTDATA}. The server then requests a quote of the report and generates a self-signed certificate with the quote embedded in it. This self-signed certificate is provided as the server certificate in the TLS handshake protocol. Upon receiving the server certificate, the client, acting as the challenger, verifies the signatures on the certificate and validates the embedded quote, including the measurements. The client also checks if the quote includes the hash of the public key, as this associates the key with the TD. This contains the assumption that the client can verify the TD identity from the Quote \ref{verify_identity}. When establishing a secure channel, both the client and server can assume the roles of attester and verifier. This enables endpoints running in TDs to authenticate each other mutually by validating TDs\cite{knauth_integrating_2019}. Issues arising from self-signed certificates, the certificate size and similar are discussed as well, with all of them  having solutions. This form of secure communication relies on certificate authorities and can thus also work if the initial communication channel is compromised. Although the latter can mean that the entire TD can be compromised which invalidates other security assumptions. They thus have similar security assumptions and guarantees.
 
@@ -189,7 +191,7 @@ As stated in the previous section there were significant speed differences betwe
 \end{itemize}
 
 They were tested in the order outlined here.
-For Total Memory Encryption, TDX and SGX were disabled, while Intel VT remained turned on. Stream \cite{Stream} and "PerformanceTest" \url{PerformanceTest} were used for benchmarking. Stream is the de facto standard for memory speed testing and PerformanceTest is a commonly used proprietary tool used to compare memory access. Using PerformanceTest there were small but measurable differences in latency of about 5\% and 2.5\% for reading speed. Writing speed stayed within 1\% of one another.
+For Total Memory Encryption, TDX and SGX were disabled, while Intel VT remained turned on. Stream \cite{Stream} and "PerformanceTest" \url{PerformanceTest} were used for benchmarking. Stream is the de facto standard for memory speed testing and PerformanceTest is a commonly used proprietary tool used to compare memory access. Using PerformanceTest there were small but measurable differences in latency of about 5\% and 2.5\% for reading speed. The Writing speed remained within 1\% of each other
 \begin{table}
 \centering
 \resizebox{\textwidth}{!}{%
