@@ -107,9 +107,12 @@
 %% --------------
 
 % Logos
-\newcommand{\thegrouplogo}{sdqlogo}
+\newcommand{\thegrouplogo}{LogoKastel}
 \newcommand{\grouplogo}[1]{\renewcommand{\thegrouplogo}{#1}}
-\newcommand{\printgrouplogo}{\includegraphics[height=1.8cm]{logos/\thegrouplogo}}
+\newcommand{\printgrouplogo}{\vbox to 1.8cm {\vfil
+    \hbox to 4.8cm{\includegraphics[height=.8cm]{logos/\thegrouplogo}}%
+    \vfil
+  }}
 \newcommand{\nogrouplogo}{\renewcommand{\printgrouplogo}{}}
 
 \titlehead{%
@@ -131,8 +134,8 @@
 
 %% variables for title page
 \newcommand{\theinstitute}{\ifcurrentbaselanguage{English}
-    {KASTEL -- Institute of Information Security and Dependability \\ Cryptography and Security Group}
-    {KASTEL -- Institut für Informationssicherheit und Verlässlichkeit \\ Arbeitsgruppe Kryptographie und Sicherheit}}
+    {KASTEL -- Institute of Information Security and Dependability}
+    {KASTEL -- Institut für Informationssicherheit und Verlässlichkeit}}
 \newcommand{\thethesistype}{}
 \newcommand{\thereviewerone}{}
 \newcommand{\thereviewertwo}{}
@@ -165,7 +168,7 @@
 \theinstitute\\[2em]
 \begin{tabular}{l l}
   \ifcurrentbaselanguage{English}{First examiner}{1. Prüfer/Prüferin}: & \thereviewerone\\
-  \ifcurrentbaselanguage{English}{Second examiner}{1. Prüfer/Prüferin}: & \thereviewertwo\\[.5em]
+  \ifcurrentbaselanguage{English}{Second examiner}{2. Prüfer/Prüferin}: & \thereviewertwo\\[.5em]
   \ifcurrentbaselanguage{English}{First advisor}{1. Betreuer/Betreuerin}: &  \theadvisorone\\
   % if there is no second advisor, do not output this line
   \ifthenelse{\equal{\theadvisortwo}{}}{}{%
@@ -216,10 +219,10 @@
 % draft mode
 \RequirePackage{ifdraft}
 \RequirePackage{ifthen}
+\usepackage[]{acronym}
 
 % enumerate subsubsections
 \setcounter{secnumdepth}{3}
-
 \setcounter{tocdepth}{1}
 
 % wallpaper for title page (KIT-Frame)
