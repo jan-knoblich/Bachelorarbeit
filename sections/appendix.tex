@@ -19,21 +19,86 @@
 %% -------------------
 %% | Example content |
 %% -------------------
-\section{First Appendix Section}
-\label{sec:appendix:FirstSection}
-		
-\setcounter{figure}{0}
-		
-\begin{figure} [ht]
-  \centering
-  \includegraphics[width=.5\linewidth]{logos/kitlogo_en_cmyk}
-  \caption{A figure}
-  \label{fig:anotherfigure}
-\end{figure}
+
+\section{Security}
+
+\paragraph{Microsoft Azure Attestation JWT verification}
+\label{jwt}
+\begin{lstlisting}[language=json]
+    {
+  "attester_tcb_status": "UpToDate",
+  "dbgstat": "disabled",
+  "eat_profile": "https://aka.ms/maa-eat-profile-tdxvm",
+  "exp": 1705689946,
+  "iat": 1705661146,
+  "intuse": "generic",
+  "iss": "https://sharedeus2e.eus2e.attest.azure.net",
+  "jti": "01bd3ce9833084751244fbde515a9c410f2af383ee483734b410d8c031120018",
+  "nbf": 1705661146,
+  "tdx_mrconfigid": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "tdx_mrowner": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "tdx_mrownerconfig": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "tdx_mrseam": "360304d34a16aace0a18e09ad2d07d2b9fd3c174378e5bf108388079827f89ff62acc5f8c473dd40706324834e202946",
+  "tdx_mrsignerseam": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "tdx_mrtd": "024a32b070383331181619fa387cb4d55d1e38879f989933055ccad5bc2db795d1737b66205949d15469dc8c1ba7ab7b",
+  "tdx_report_data": "c90f98ba8ab80c7b442b6b8eb30af54e0508077b11adb525af6dfbcc8714e52a0000000000000000000000000000000000000000000000000000000000000000",
+  "tdx_rtmr0": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "tdx_rtmr1": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "tdx_rtmr2": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "tdx_rtmr3": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "tdx_seam_attributes": "0000000000000000",
+  "tdx_seamsvn": 258,
+  "tdx_td_attributes": "0000000000000000",
+  "tdx_td_attributes_debug": false,
+  "tdx_td_attributes_key_locker": false,
+  "tdx_td_attributes_perfmon": false,
+  "tdx_td_attributes_protection_keys": false,
+  "tdx_td_attributes_septve_disable": false,
+  "tdx_tee_tcb_svn": "02010600000000000000000000000000",
+  "tdx_xfam": "e718060000000000",
+  "x-ms-attestation-type": "tdxvm",
+  "x-ms-compliance-status": "azure-compliant-cvm",
+  "x-ms-policy-hash": "9NY0VnTQ-IiBriBplVUpFbczcDaEBUwsiFYAzHu_gco",
+  "x-ms-runtime": {
+    "keys": [
+      {
+        "e": "AQAB",
+        "key_ops": [
+          "sign"
+        ],
+        "kid": "HCLAkPub",
+        "kty": "RSA",
+        "n": "p4ig6gABSEmW9oijgg37ZDj7ZcaxnyN2h9KTHLAUYJnoP-42Hi209p1RdiL3HSWdRzzSDuXKjQw2kzlmcX1XfBq9-3-L-CVoyCvpiin-6k9L_Rbu0upEiBnIw2IzJ5N6EZx7zfX8vdh76MMnT-_U2Pd2psoiUufzNvs2-5d0QB5NyTuCnXbWD_yWb1OQWZAPioXEIyR13ic-FxPt5UiGG6kBjGp41rqlEQ0B_tsfn3e19_lTx76wVfEkEOw5Yq60rTyNuxiOnR59reaxXui0qJTOkoiDOJ-tHLffY_jTT-8EUFtWS1mcPoye2uKRhAI99xjTWg88Ft4sIUv8stOTvw"
+      },
+      {
+        "e": "AQAB",
+        "key_ops": [
+          "encrypt"
+        ],
+        "kid": "HCLEkPub",
+        "kty": "RSA",
+        "n": "4galYAAA8uQxZCGg7qvvY0hcck4UY-EPiqWyxkHH0rMyQJh2nWuriu5wrh4JPPy6HvtX5M-mr5ecHPYf4S0qTOcqWZX01Uj8Ky1sbvA6g1GELe0Jdqf9piQDmS90dGwR6PItHMObnejzBocweHxkuSm7pGSuOAniX6KDid1hsxED5gYLxg2wHAXFICz9UZOTQ6FZmezVz0Krpr2AF4fKawOIaQSwNl7GIjH09x7rFRP2H1zOW6sJYAIAIT7F7vfncB3ZpPHUrU9U-qSQC2LZBRtjuBaKG-kGU6jAOkMC8aXu_pb99vgrrJpn2Nf8VodePJ7gzwladZjCnflyUWViYw"
+      }
+    ],
+    "user-data": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "vm-configuration": {
+      "console-enabled": true,
+      "root-cert-thumbprint": "6nZZnYaJc4KqUZ_yvA-mucFdYNouvlPnITnNMXsHl-0",
+      "secure-boot": true,
+      "tpm-enabled": true,
+      "tpm-persisted": true,
+      "vmUniqueId": "C540205B-C5A0-4380-A0F9-7ECA9B91113A"
+    }
+  },
+  "x-ms-ver": "1.0"
+}
+\end{lstlisting}
 
 \section{Code}
 
 \subsection{Benchmark Code}
+
+
 
 \section{Benchmark Results}
 \subsection{Roberta Non TD}

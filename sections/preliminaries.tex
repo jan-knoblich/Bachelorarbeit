@@ -19,6 +19,20 @@ In the context of Confidential Computing, unauthorized entities include, but are
 Combined, these three attributes provide an assurance that the data are kept confidential and the calculations that are performed are correct.
 Depending on the specific TEE used, there might be additional security properties, but the TEEs covered in this thesis do not have more\cite{noauthor_ccc_outreach_whitepaper_updated_november_2022pdf_2023}.
 
+\myparagraph{General Attack Vectors}
+
+In general threat vectors in scope for confidential computing according to the Confidential Computing Consortium are
+
+\begin{itemize}
+    \item Software Attacks
+    \item Protocol Attacks
+    \item Cryptogrphic Attacks
+    \item Basic physical attacks
+    \item Basic upstream supply chain attacks
+\end{itemize}
+
+\myparagraph{Integrity Measurement Architecture}
+
 Integrity Measurement Architecture (IMA) is a feature of the Linux kernel that ensures system integrity while the system is running. It computes the hashes of files and programs prior to their execution, provides reporting capabilities, and verifies that they adhere to a predefined list.\cite{Luo_container_ima}. IMA is recommended by the TCG for identity verification \cite{TCG Guidance on Integrity Measurements and Event Log Processing}. According to the IMA wiki \url{https://sourceforge.net/p/linux-ima/wiki/Home/} it contains two subsystems: Measurement and Appraisal. Measurement is responsible for gathering, storing, and verifying measurements. Appraisal conducts the evaluation and auditing tasks by comparing a collected hash with a stored hash and prevents access if they do not match. IMA depends on Trusted Platform Module (TPM)\cite{Luo_container_ima}. 
 
 \section{Trusted Domain Extension}

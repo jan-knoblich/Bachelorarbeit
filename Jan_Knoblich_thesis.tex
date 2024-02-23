@@ -78,7 +78,7 @@ Cryptography and Security Group}
 \definecolor{black}{RGB}{0,0,0}
 \colorlet{numb}{magenta!60!black}
 
-\lstdefinelanguage{json}{
+\lstdefinelanguage{jsonmain}{
     basicstyle=\small\ttfamily,
     numbers=left,
     numberstyle=\scriptsize,
@@ -105,6 +105,11 @@ Cryptography and Security Group}
       {\}}{{{\color{delim}{\}}}}}{1}
       {[}{{{\color{delim}{[}}}}{1}
       {]}{{{\color{delim}{]}}}}{1},
+}
+\lstdefinelanguage{json}{%
+  language     = jsonmain,
+  basicstyle=\footnotesize\ttfamily,
+  numbers=none,
 }
 \usepackage{cleveref}
 
