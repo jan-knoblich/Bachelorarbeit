@@ -51,6 +51,7 @@ With TDX being a virtual machine-based TEE, it depends on VT to ensure isolation
 Intel Total Memory Encryption (TME) is a security measure designed to protect against attackers who have physical access to the memory of a computer or direct access via a host system and attempt to steal data. TME aims to protect against some, for example bus memory probing, but not all physical attacks, for example Direct Memory Access attacks.TME encrypts the entire computer's memory using a single key, which is generated at boot-time by a hardened hardware-based random number generator. Memory encryption is performed by encryption engines on each memory controller, using the recommended standard AES-XTS, for storage encryption, of the US National Institute of Standards and Technologies \cite{morris_dworkin_recommendation_2015} and the German Federal Office for Information Security with 128 or 256-bit keys\cite[~p. 24]{bundesamt_fur_sicherheit_in_der_informationstechnik_cryptographic_2023}. The encryption engines sit directly in between the memory controllers and the CPU cache, meaning the data inside the SoC remains plain text, while the data inside the memory is always encrypted. Total Memory Encryption Multi Key (TME-MK, also sometimes MKTME) extends TME to support multiple keys and memory encryption at page granularity. To use TME-MK in virtualized environments, the hypervisor must be trusted, which violates the threat model for confidential computing, which will be explained in more detail in chapter \ref{Security Analysis}. Therefore, in TDX, the TDX Module is responsible for controlling the memory encryption of TDs. Figure \ref{fig:component-overview} shows what a TD encapsulates. The TDX Module requests the processor to generate a new key when building a new TD and binds the two together via its Key Management Tables. The TDX module then utilizes MKTME to encrypt the cache lines. The TDXM stores cryptographic keys only in its Key Encryption Tables, thus never exposing them to the outside\cite{cheng_intel_2023}. 
 
 \subsection{TDX System Architecture}
+\label{TDX Architecture}
 Fig \ref{fig:component-overview} illustrates the runtime architecture of TDX. It is made up of two key components: 
 \begin{figure}
 \centering
@@ -106,12 +107,12 @@ The TD attestation protocol involves six key entities: the Quoting Enclave (QE),
 \label{fig:EasyAttestation}
 \end{figure}
 Figure \ref{fig:EasyAttestation} shows a rudimentary TDX attestation flow with trusted and untrusted entities as well as their boundaries. The challenger requests a quote from the guest TD for challenge. He can include a one-time key, called nonce to prevent replay attacks. A quote is all the information necessary to attest to a specific set of hardware. After receiving the request the guest TD can supply additional runtime data, which is important to verify the authenticity of the TD, and will then send a request via a character device to the TDX module. This report contains data the TDX module holds about the TD, most importantly measurements relating to the creation of the TD, and the data that was supplied by the TD. To prevent issues with the data transfer via the untrusted Host VMM the CPU has a Message Authentication Key (MAC) from the TD QE, which it uses to encrypt the TDReport. The TD QE now calls the CPU again to verify the integrity of the TDReport.
-To create a chain of trust, which can only be accessed via Intel, the Attestation key was previously signed by the PCE key, which was signed by Intel. This means that the Quote can in the end only be decrypted via an Intel service.
+To create a chain of trust, which can only be accessed via Intel, the Attestation key was previously signed by the PCE key, which was signed by Intel. 
 
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{figures/Attestation Diagram.png}
-\caption{Intel TDX Attestation flow diagram. Text above the arrow represents data being sent, text below function calls. The Host VMM in red is untrusted. The PCE is shown to have the same layout as \cref{fig:pre-attestation}. Adapted from \cite{sardar_demystifying_2021}}.
+\caption{Intel TDX Attestation flow diagram. Text above the arrow represents data being sent, text below function calls. The Host VMM in red is untrusted. The PCE is shown to have the same layout as \cref{fig:local-attestation}. Adapted from \cite{sardar_demystifying_2021}}.
 \label{fig:QuoteGeneration}
 \end{figure}
 The following will now explain each step in more technical detail, while using Figure \ref{fig:QuoteGeneration} as reference. 
@@ -131,7 +132,7 @@ Calculating the \textit{hash} means computing the SHA384 of the input. \textit{H
     \item A page filled with zeros, designed to be used in cases where the Intel TDX Module needs a read-only constant 0 page encrypted with the TD’s private key.
 \end{itemize}
 \item TDXM calls SEAMOPS[SEAMREPORT] with tdih and rdata
-\item[5. \& 6.] CPU generates SEAMREPORT smr  with rms (red) and tcbi (purple) \ref{fig:tdr} and returns it to the TDX module. This importantly contains measurements about the TDX module and about the TDX module signer, in this case Intel.
+\item[5. \& 6.] CPU generates SEAMREPORT smr with rms and tcbi. They are respectively red and purple in \cref{fig:tdr}. I then returns that report to the TDX module. This importantly contains measurements about the TDX module and about the TDX module signer, in this case Intel.
 \setItemnumber{7}
 \item TDXM builds tdr with smr, res4, and tdi. Content for the entire tdr can be seen in Figure \ref{fig:tdr}
 \begin{figure}
@@ -144,7 +145,8 @@ Calculating the \textit{hash} means computing the SHA384 of the input. \textit{H
 \item[9 \& 10.]The Guest TD sends tdr to the TD Quoting enclave, via the untrusted VMM
 \setItemnumber{11}
 \item TD QE verifies the hashes in report
-\item Rms (part of smr, red in Fig \ref{fig:tdr}) is used as an argument in the ENCLU[EVERIFYREPORT2] cpu function. 
+\item Rms (part of smr, red in Fig \ref{fig:tdr}) is used as an argument in the 
+ENCLU[EVERIFYREPORT2] cpu function. 
 \item[13. \& 14.] CPU performs the verification of rms and returns the result to the TD QE. The verification consists of three main steps: 
 \begin{enumerate}
 \item verify that the header rtyp in the report is correct, 
@@ -157,7 +159,7 @@ Calculating the \textit{hash} means computing the SHA384 of the input. \textit{H
 \setItemnumber{18}
 \item TD sends quote to relying party(RP)
 \end{enumerate}
-The challenger can now verify the Signature on the Quotebody by going back the chain of trust rooted at Intel. This verification is based on the Data Center Attestation Primitives (DCAP) which will be explored later on in \ref{Security Analysis}. After verification the challenger can now send a secret encrypted with the public key of the TD to the TD establishing a common secret for further secure communication. If the TD did not include a public key in its quote section \ref{Establishing_a_secure_connection} contains further information on how to establish a secure connection. According to \cite{sardar_formal_2023} using ProVerif, this ensures integrity for the tcbi, tdi and rdata. It also ensures freshness and secrecy. Authentication does not hold as long as secure communication via TLS or similar is not established.
+The challenger can now verify the Signature on the Quotebody by going back the chain of trust rooted at Intel. This verification is based on the Data Center Attestation Primitives (DCAP) which will be explored later on in \ref{Security Analysis}. After verification the challenger can now send a secret encrypted with the public key of the TD to the TD establishing a common secret for further secure communication. If the TD did not include a public key in its quote section \cref{Establishing_a_secure_connection} contains further information on how to establish a secure connection. According to \cite{sardar_formal_2023} using ProVerif, this ensures integrity for the tcbi, tdi and rdata. It also ensures freshness and secrecy. Authentication does not hold as long as secure communication via TLS or similar is not established.
 
 \section{Related Work}
 TDX has been looked at a fair amount of times already. In particular, a nearly complete security analysis of its hardware and the low-level TDX software by Aktas et al. at Google \cite{aktas_intel_nodate}. They limited their analysis to just the host-side without looking at TD user or developer issues down the line. Similarly, Sardar et al. formally verified TDX attestation in \cite{sardar_demystifying_2021}. They looked at the theoretical security of a perfect implementation. Knauth et al. introduced a way to create a secure channel using Intel SGX \cite{knauth_integrating_2019}, this will be used as the basis to establishing a secure channel to the TD in this thesis. Cheng et al. briefly mention this as well, but their focus was more generally on the TDX architecture \cite{cheng_intel_2023}. This thesis explores the feasibility of those for an average user, as well as its security assumptions and pitfalls. Lefeuvre et al. have looked at difficulties and issues with safe and confidential I/O \cite{lefeuvre_towards_2023}, this will only be briefly touched upon in this thesis. Delignat-Lavaud et al. looked at issues pertaining the TCB of confidential services. Their information was used in this thesis to look at the feasibility of using CC for the average user. Their consensus was picked up in this thesis that while CC is great in theory, the practice is lacking.

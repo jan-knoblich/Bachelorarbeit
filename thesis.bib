@@ -670,12 +670,58 @@ This paper's contributions are a summary of the Intel-specific architectural and
 	file = {Intel® Trust Domain Extensions.pdf:C\:\\Users\\jakn\\Zotero\\storage\\FWSUQ5PB\\Intel® Trust Domain Extensions.pdf:application/pdf},
 }
 
-@article{zhou_side-channel_nodate,
-	title = {Side-Channel Attacks: Ten Years After Its Publication and the Impacts on Cryptographic Module Security Testing},
-	author = {Zhou, {YongBin} and Feng, {DengGuo}},
+
+@misc{kelsey_second_2004,
+	title = {Second Preimages on n-bit Hash Functions for Much Less than 2{\textasciicircum}n Work},
+	url = {https://eprint.iacr.org/2004/304},
+	abstract = {We provide a second preimage attack on all n-bit iterated
+hash functions with Damgard-Merkle strengthening and n-bit
+itermediate states, allowing a second preimage to be found for a
+2k-message-block message with about k×2n/2+1+2n−k+1
+work. Using {SHA}1 as an example, our attack can find a second preimage
+for a 260 byte message in 2106 work, rather than the
+previously expected 2160 work. We also provide slightly cheaper
+ways to find multicollisions than the method of Joux. Both
+of these results are based on expandable messages--patterns for
+producing messages of varying length, which all collide on the
+intermediate hash result immediately after processing the
+message. We also provide algorithms for finding expandable messages for a hash function, using only a small multiple of the work done to find a single collision in the hash function.},
+	number = {2004/304},
+	author = {Kelsey, John and Schneier, Bruce},
+	urldate = {2024-02-24},
+	date = {2004},
+	note = {Publication info: Published elsewhere. Unknown where it was published},
+	keywords = {hash functions},
+	file = {Kelsey_Schneier_2004_Second Preimages on n-bit Hash Functions for Much Less than 2^n Work.pdf:C\:\\Users\\jakn\\Zotero\\storage\\5JB9MWWJ\\Kelsey_Schneier_2004_Second Preimages on n-bit Hash Functions for Much Less than 2^n Work.pdf:application/pdf},
+}
+
+@inproceedings{bhargavan_transcript_2016,
+	location = {San Diego, {CA}},
+	title = {Transcript Collision Attacks: Breaking Authentication in {TLS}, {IKE}, and {SSH}},
+	isbn = {978-1-891562-41-9},
+	url = {https://www.ndss-symposium.org/wp-content/uploads/2017/09/transcript-collision-attacks-breaking-authentication-tls-ike-ssh.pdf},
+	doi = {10.14722/ndss.2016.23418},
+	shorttitle = {Transcript Collision Attacks},
+	abstract = {In response to high-proﬁle attacks that exploit hash function collisions, software vendors have started to phase out the use of {MD}5 and {SHA}-1 in third-party digital signature applications such as X.509 certiﬁcates. However, weak hash constructions continue to be used in various cryptographic constructions within mainstream protocols such as {TLS}, {IKE}, and {SSH}, because practitioners argue that their use in these protocols relies only on second preimage resistance, and hence is unaffected by collisions. This paper systematically investigates and debunks this argument.},
+	eventtitle = {Network and Distributed System Security Symposium},
+	booktitle = {Proceedings 2016 Network and Distributed System Security Symposium},
+	publisher = {Internet Society},
+	author = {Bhargavan, Karthikeyan and Leurent, Gaetan},
+	urldate = {2024-02-24},
+	date = {2016},
 	langid = {english},
-	keywords = {⛔ No {DOI} found},
-	file = {Zhou and Feng - Side-Channel Attacks Ten Years After Its Publicat.pdf:C\:\\Users\\jakn\\Zotero\\storage\\VUHIY8KS\\Zhou and Feng - Side-Channel Attacks Ten Years After Its Publicat.pdf:application/pdf},
+	file = {Bhargavan and Leurent - 2016 - Transcript Collision Attacks Breaking Authenticat.pdf:C\:\\Users\\jakn\\Zotero\\storage\\YGSYHYJG\\Bhargavan and Leurent - 2016 - Transcript Collision Attacks Breaking Authenticat.pdf:application/pdf},
+}
+
+
+@misc{zhou_side-channel_nodate,
+  title={Side-Channel Attacks: Ten Years After Its Publication and the Impacts on Cryptographic Module Security Testing},
+  booktitle={IACR Eprint archive},
+  keywords={implementation /},
+  url={http://eprint.iacr.org/2005/388},
+  note={ zyb@is.iscas.ac.cn 13083 received 27 Oct 2005},
+  author={YongBin Zhou and DengGuo Feng},
+  year=2005
 }
 
 @online{intel_corporation_mktme_2023,
@@ -1329,7 +1375,7 @@ attention to remote attestation},
 	file = {Intel® Trust Domain Extension Linux Guest Kernel Security Specification — Intel® Trust Domain Extension:C\:\\Users\\jakn\\Zotero\\storage\\SQMSV3Y5\\security-spec.html:text/html},
 }
 
-@misc{intel_corporation_intel_nodate,
+@misc{intel_corporation_intel_TXT_nodate,
 	title = {Intel® Trusted Execution Technology Hardware-based Technology for Enhancing Server Platform Security},
 	url = {https://www.intel.com/content/dam/www/public/us/en/documents/white-papers/trusted-execution-technology-security-paper.pdf},
 	author = {{Intel Corporation}},
@@ -1337,13 +1383,35 @@ attention to remote attestation},
 	file = {Intel® Trusted Execution Technology Hardware-based.pdf:C\:\\Users\\jakn\\Zotero\\storage\\IXDRCLFV\\Intel® Trusted Execution Technology Hardware-based.pdf:application/pdf},
 }
 
-@misc{intel_corporation_intel_2023,
+@misc{intel_corporation_intel_seam_2023,
 	title = {Intel® Trust Domain Extensions - {SEAM} Loader ({SEAMLDR}) Interface Specification},
 	url = {https://cdrdv2.intel.com/v1/dl/getContent/739045},
 	author = {{Intel Corporation}},
 	date = {2023-09-07},
 	langid = {english},
 	file = {Intel® Trust Domain Extensions - SEAM Loader (SEAM.pdf:C\:\\Users\\jakn\\Zotero\\storage\\LNF77MH6\\Intel® Trust Domain Extensions - SEAM Loader (SEAM.pdf:application/pdf},
+}
+
+
+@software{intel_corporation_inteltdx-tools_2024,
+	title = {intel/tdx-tools},
+	rights = {Apache-2.0},
+	url = {https://github.com/intel/tdx-tools},
+	abstract = {Cloud Stack and Solutions for Intel {TDX} (Trust Domain Extension)},
+	publisher = {Intel Corporation},
+	author = {{Intel Corporation}},
+	urldate = {2024-02-28},
+	date = {2024-02-18},
+	note = {original-date: 2021-12-02T22:27:06Z},
+	keywords = {build, confidential-computing, kvm, qemu, tdx, uefi, virtualization},
+}
+
+
+@book{wright_spycatcher,
+    author = {Peter Wright, Paul Greengrass},
+    title = {Spycatcher : the Candid Autobiography of a Senior Intelligence Officer},
+    publisher = {Heinemann},
+    year = {1987}
 }
 
 @online{confidential_computing_consortium_ccc--technical-analysis--confidential-computing-v13_unlockedpdf_2023,
