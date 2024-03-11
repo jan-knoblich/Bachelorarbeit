@@ -52,7 +52,7 @@ publisher = {USENIX Association},
 month = sep
 }
 
-@article{aktas_intel_nodate,
+@misc{aktas_intel_nodate,
 	title = {Intel Trust Domain Extensions ({TDX}) Security Review},
 	author = {Aktas, Erdem and Cohen, Cfir and Eads, Josh and Forshaw, James and Wilhelm, Felix},
 	langid = {english},
@@ -128,7 +128,7 @@ month = sep
 	file = {Machiry et al. - 2017 - BOOMERANG Exploiting the Semantic Gap in Trusted .pdf:C\:\\Users\\jakn\\Zotero\\storage\\I76ITT2C\\Machiry et al. - 2017 - BOOMERANG Exploiting the Semantic Gap in Trusted .pdf:application/pdf},
 }
 
-@article{chen_voltpillager_nodate,
+@misc{chen_voltpillager_nodate,
 	title = {{VoltPillager}: Hardware-based fault injection attacks against Intel {SGX} Enclaves using the {SVID} voltage scaling interface},
 	abstract = {Hardware-based fault injection attacks such as voltage and clock glitching have been thoroughly studied on embedded devices. Typical targets for such attacks include smartcards and low-power microcontrollers used in {IoT} devices. This paper presents the ﬁrst hardware-based voltage glitching attack against a fully-ﬂedged Intel {CPU}. The transition to complex {CPUs} is not trivial due to several factors, including: a complex operating system, large power consumption, multi-threading, and high clock speeds. To this end, we have built {VoltPillager}, a low-cost tool for injecting messages on the Serial Voltage Identiﬁcation bus between the {CPU} and the voltage regulator on the motherboard. This allows us to precisely control the {CPU} core voltage. We leverage this powerful tool to mount fault-injection attacks that breach conﬁdentiality and integrity of Intel {SGX} enclaves. We present proof-of-concept key-recovery attacks against cryptographic algorithms running inside {SGX}. We demonstrate that {VoltPillager} attacks are more powerful than recent software-only undervolting attacks against {SGX} ({CVE}-2019-11157) because they work on fully patched systems with all countermeasures against software undervolting enabled. Additionally, we are able to fault securitycritical operations by delaying memory writes. Mitigation of {VoltPillager} is not straightforward and may require a rethink of the {SGX} adversarial model where a cloud provider is untrusted and has physical access to the hardware.},
 	author = {Chen, Zitai and Vasilakis, Georgios and Murdock, Kit and Dean, Edward and Oswald, David and Garcia, Flavio D},
@@ -552,6 +552,37 @@ Conference Name: {IEEE} Internet of Things Journal},
 	file = {ProQuest Ebook Snapshot:C\:\\Users\\jakn\\Zotero\\storage\\7VMQGAWA\\detail.html:text/html;Threat_Modeling_Designing_for_Security_----_(Part_I_Getting_Started_).pdf:C\:\\Users\\jakn\\Zotero\\storage\\KEV7KC48\\Threat_Modeling_Designing_for_Security_----_(Part_I_Getting_Started_).pdf:application/pdf;Threat_Modeling_Designing_for_Security_----_(Part_II_Finding_Threats_).pdf:C\:\\Users\\jakn\\Zotero\\storage\\W338QVIN\\Threat_Modeling_Designing_for_Security_----_(Part_II_Finding_Threats_).pdf:application/pdf},
 }
 
+@misc{hashemi_data_2022,
+	title = {Data Leakage via Access Patterns of Sparse Features in Deep Learning-based Recommendation Systems},
+	url = {http://arxiv.org/abs/2212.06264},
+	abstract = {Online personalized recommendation services are generally hosted in the cloud where users query the cloud-based model to receive recommended input such as merchandise of interest or news feed. State-of-the-art recommendation models rely on sparse and dense features to represent users' profile information and the items they interact with. Although sparse features account for 99\% of the total model size, there was not enough attention paid to the potential information leakage through sparse features. These sparse features are employed to track users' behavior, e.g., their click history, object interactions, etc., potentially carrying each user's private information. Sparse features are represented as learned embedding vectors that are stored in large tables, and personalized recommendation is performed by using a specific user's sparse feature to index through the tables. Even with recently-proposed methods that hides the computation happening in the cloud, an attacker in the cloud may be able to still track the access patterns to the embedding tables. This paper explores the private information that may be learned by tracking a recommendation model's sparse feature access patterns. We first characterize the types of attacks that can be carried out on sparse features in recommendation models in an untrusted cloud, followed by a demonstration of how each of these attacks leads to extracting users' private information or tracking users by their behavior over time.},
+	number = {{arXiv}:2212.06264},
+	publisher = {{arXiv}},
+	author = {Hashemi, Hanieh and Xiong, Wenjie and Ke, Liu and Maeng, Kiwan and Annavaram, Murali and Suh, G. Edward and Lee, Hsien-Hsin S.},
+	urldate = {2024-03-08},
+	date = {2022-12-12},
+	eprinttype = {arxiv},
+	eprint = {2212.06264 [cs]},
+	keywords = {Computer Science - Computational Engineering, Finance, and Science, Computer Science - Cryptography and Security, Computer Science - Distributed, Parallel, and Cluster Computing, Computer Science - Machine Learning},
+	file = {arXiv.org Snapshot:C\:\\Users\\jakn\\Zotero\\storage\\ZIYVJ3Z5\\2212.html:text/html;Hashemi et al_2022_Data Leakage via Access Patterns of Sparse Features in Deep Learning-based.pdf:C\:\\Users\\jakn\\Zotero\\storage\\KTMQNGB8\\Hashemi et al_2022_Data Leakage via Access Patterns of Sparse Features in Deep Learning-based.pdf:application/pdf},
+}
+
+@misc{john_connecting_2017,
+	title = {Connecting the Dots: Privacy Leakage via Write-Access Patterns to the Main Memory},
+	url = {http://arxiv.org/abs/1702.03965},
+	shorttitle = {Connecting the Dots},
+	abstract = {Data-dependent access patterns of an application to an untrusted storage system are notorious for leaking sensitive information about the user's data. Previous research has shown how an adversary capable of monitoring both read and write requests issued to the memory can correlate them with the application to learn its sensitive data. However, information leakage through only the write access patterns is less obvious and not well studied in the current literature. In this work, we demonstrate an actual attack on power-side-channel resistant Montgomery's ladder based modular exponentiation algorithm commonly used in public key cryptography. We infer the complete 512-bit secret exponent in \${\textbackslash}sim3.5\$ minutes by virtue of just the write access patterns of the algorithm to the main memory. In order to learn the victim algorithm's write access patterns under realistic settings, we exploit a compromised {DMA} device to take frequent snapshots of the application's address space, and then run a simple differential analysis on these snapshots to find the write access sequence. The attack has been shown on an Intel Core({TM}) i7-4790 3.60GHz processor based system. We further discuss a possible attack on {McEliece} public-key cryptosystem that also exploits the write-access patterns to learn the secret key.},
+	number = {{arXiv}:1702.03965},
+	publisher = {{arXiv}},
+	author = {John, Tara Merin and Haider, Syed Kamran and Omar, Hamza and van Dijk, Marten},
+	urldate = {2024-03-08},
+	date = {2017-06-17},
+	eprinttype = {arxiv},
+	eprint = {1702.03965 [cs]},
+	keywords = {Computer Science - Cryptography and Security},
+	file = {arXiv.org Snapshot:C\:\\Users\\jakn\\Zotero\\storage\\GEI7QIAX\\1702.html:text/html;John et al_2017_Connecting the Dots.pdf:C\:\\Users\\jakn\\Zotero\\storage\\CB8C2DXF\\John et al_2017_Connecting the Dots.pdf:application/pdf},
+}
+
 @article{noauthor_large_nodate,
 	title = {Large Language Models},
 	langid = {english},
@@ -564,6 +595,7 @@ Conference Name: {IEEE} Internet of Things Journal},
 	author = {Sardar, Muhammad and Faqeh, Rasha and Fetzer, Christof},
 	date = {2020-07-09},
 	file = {Sardar et al_2020_Formal Foundations for Intel SGX Data Center Attestation Primitives.pdf:C\:\\Users\\jakn\\Zotero\\storage\\NG8ARMFI\\Sardar et al_2020_Formal Foundations for Intel SGX Data Center Attestation Primitives.pdf:application/pdf},
+    URL = {https://www.researchgate.net/publication/375592777_Formal_Specification_and_Verification_of_Architecturally-defined_Attestation_Mechanisms_in_Arm_CCA_and_Intel_TDX},
 }
 
 @article{scarlata_supporting_nodate,
@@ -787,6 +819,15 @@ message. We also provide algorithms for finding expandable messages for a hash f
 	urldate = {2023-12-06},
 	date = {2023-10-05},
 	file = {Intel® Trust Domain Extension Linux Guest Kernel Security Specification — Intel® Trust Domain Extension:C\:\\Users\\jakn\\Zotero\\storage\\V7X8PT2K\\security-spec.html:text/html},
+}
+
+@inproceedings{Lipp2021Platypus,
+  title = {{PLATYPUS: Software-based Power Side-Channel Attacks on x86}},
+  author = {Lipp, Moritz and Kogler, Andreas and Oswald, David and Schwarz,
+            Michael and Easdon, Catherine and Canella, Claudio and Gruss, Daniel},
+  booktitle={2021 IEEE Symposium on Security and Privacy (SP)},
+  year = {2021},
+  organization={IEEE}
 }
 
 @misc{devlin_bert_2019-1,
@@ -1221,6 +1262,109 @@ Publisher: Morris J. Dworkin, Elaine B. Barker, James R. Nechvatal, James Foti, 
 	urldate = {2024-02-15},
 	file = {overview-of-intel-sgx-enclave-637284.pdf:C\:\\Users\\jakn\\Zotero\\storage\\5TG6L6SR\\overview-of-intel-sgx-enclave-637284.pdf:application/pdf},
 }
+
+@software{graeber_mattifestationtcglogtools_2023,
+	title = {mattifestation/{TCGLogTools}},
+	rights = {{BSD}-3-Clause},
+	url = {https://github.com/mattifestation/TCGLogTools},
+	abstract = {A set of tools to retrieve and parse {TCG} measured boot logs. Microsoft refers to these as Windows Boot Confirguration Logs ({WBCL}). In order to retrieve these logs, you must be running at least Windows 8 with the {TPM} enabled.},
+	author = {Graeber, Matt},
+	urldate = {2024-03-03},
+	date = {2023-12-24},
+	note = {original-date: 2018-06-17T02:53:32Z},
+}
+
+@article{munoz_survey_2023,
+	title = {A survey on the (in)security of trusted execution environments},
+	volume = {129},
+	issn = {0167-4048},
+	url = {https://www.sciencedirect.com/science/article/pii/S0167404823000901},
+	doi = {10.1016/j.cose.2023.103180},
+	abstract = {As the number of security and privacy attacks continue to grow around the world, there is an ever increasing need to protect our personal devices. As a matter of fact, more and more manufactures are relying on Trusted Execution Environments ({TEEs}) to shield their devices. In particular, {ARM} {TrustZone} ({TZ}) is being widely used in numerous embedded devices, especially smartphones, and this technology is the basis for secure solutions both in industry and academia. However, as shown in this paper, {TEE} is not bullet-proof and it has been successfully attacked numerous times and in very different ways. To raise awareness among potential stakeholders interested in this technology, this paper provides an extensive analysis and categorization of existing vulnerabilities in {TEEs} and highlights the design flaws that led to them. The presented vulnerabilities, which are not only extracted from existing literature but also from publicly available exploits and databases, are accompanied by some effective countermeasures to reduce the likelihood of new attacks. The paper ends with some appealing challenges and open issues.},
+	pages = {103180},
+	journaltitle = {Computers \& Security},
+	author = {Muñoz, Antonio and Ríos, Ruben and Román, Rodrigo and López, Javier},
+	urldate = {2024-03-04},
+	date = {2023-06-01},
+	keywords = {Computer security, Hardware attacks, Secure hardware, Side-channel attacks, Software attacks, Trusted execution environments},
+	file = {Muñoz et al_2023_A survey on the (in)security of trusted execution environments.pdf:C\:\\Users\\jakn\\Zotero\\storage\\2R88W33S\\Muñoz et al_2023_A survey on the (in)security of trusted execution environments.pdf:application/pdf;ScienceDirect Snapshot:C\:\\Users\\jakn\\Zotero\\storage\\T56T3E4I\\S0167404823000901.html:text/html},
+}
+
+@misc{lipp_nethammer_2018,
+	title = {Nethammer: Inducing Rowhammer Faults through Network Requests},
+	url = {http://arxiv.org/abs/1805.04956},
+	shorttitle = {Nethammer},
+	abstract = {A fundamental assumption in software security is that memory contents do not change unless there is a legitimate deliberate modification. Classical fault attacks show that this assumption does not hold if the attacker has physical access. Rowhammer attacks showed that local code execution is already sufficient to break this assumption. Rowhammer exploits parasitic effects in {DRAM} to modify the content of a memory cell without accessing it. Instead, other memory locations are accessed at a high frequency. All Rowhammer attacks so far were local attacks, running either in a scripted language or native code. In this paper, we present Nethammer. Nethammer is the first truly remote Rowhammer attack, without a single attacker-controlled line of code on the targeted system. Systems that use uncached memory or flush instructions while handling network requests, e.g., for interaction with the network device, can be attacked using Nethammer. Other systems can still be attacked if they are protected with quality-of-service techniques like Intel {CAT}. We demonstrate that the frequency of the cache misses is in all three cases high enough to induce bit flips. We evaluated different bit flip scenarios. Depending on the location, the bit flip compromises either the security and integrity of the system and the data of its users, or it can leave persistent damage on the system, i.e., persistent denial of service. We investigated Nethammer on personal computers, servers, and mobile phones. Nethammer is a security landslide, making the formerly local attack a remote attack.},
+	number = {{arXiv}:1805.04956},
+	publisher = {{arXiv}},
+	author = {Lipp, Moritz and Aga, Misiker Tadesse and Schwarz, Michael and Gruss, Daniel and Maurice, Clémentine and Raab, Lukas and Lamster, Lukas},
+	urldate = {2024-03-04},
+	date = {2018-05-13},
+	eprinttype = {arxiv},
+	eprint = {1805.04956 [cs]},
+	keywords = {Computer Science - Cryptography and Security},
+	file = {arXiv.org Snapshot:C\:\\Users\\jakn\\Zotero\\storage\\HHU2N5SJ\\1805.html:text/html;Lipp et al_2018_Nethammer.pdf:C\:\\Users\\jakn\\Zotero\\storage\\HDJU944B\\Lipp et al_2018_Nethammer.pdf:application/pdf},
+}
+
+
+@article{gorard_revisiting_2005,
+	title = {Revisiting a 90-Year-Old Debate: The Advantages of the Mean Deviation},
+	volume = {53},
+	issn = {1467-8527},
+	url = {https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1467-8527.2005.00304.x},
+	doi = {10.1111/j.1467-8527.2005.00304.x},
+	shorttitle = {Revisiting a 90-Year-Old Debate},
+	abstract = {{ABSTRACT}: This paper discusses the reliance of numerical analysis on the concept of the standard deviation, and its close relative the variance. It suggests that the original reasons why the standard deviation concept has permeated traditional statistics are no longer clearly valid, if they ever were. The absolute mean deviation, it is argued here, has many advantages over the standard deviation. It is more efficient as an estimate of a population parameter in the real-life situation where the data contain tiny errors, or do not form a completely perfect normal distribution. It is easier to use, and more tolerant of extreme values, in the majority of real-life situations where population parameters are not required. It is easier for new researchers to learn about and understand, and also closely linked to a number of arithmetic techniques already used in the sociology of education and elsewhere. We could continue to use the standard deviation instead, as we do presently, because so much of the rest of traditional statistics is based upon it (effect sizes, and the F-test, for example). However, we should weigh the convenience of this solution for some against the possibility of creating a much simpler and more widespread form of numeric analysis for many.},
+	pages = {417--430},
+	number = {4},
+	journaltitle = {British Journal of Educational Studies},
+	author = {Gorard, Stephen},
+	urldate = {2024-02-19},
+	date = {2005},
+	langid = {english},
+	note = {\_eprint: https://onlinelibrary.wiley.com/doi/pdf/10.1111/j.1467-8527.2005.00304.x},
+	keywords = {mean deviation, measuring variation, political arithmetic, social construction of statistics, standard deviation, variance},
+}
+
+
+@online{Marlon_Brando,
+	title = {A quote by Marlon Brando},
+	url = {https://www.goodreads.com/quotes/433493-privacy-is-not-something-that-i-m-merely-entitled-to-it-s},
+	abstract = {Privacy is not something that I'm merely entitled to, it's an absolute prerequisite.},
+	author = {{Goodreads}},
+	urldate = {2024-03-07},
+}
+
+
+@article{mccalpin_memory_1995,
+	title = {Memory bandwidth and machine balance in current high performance computers},
+	volume = {2},
+	url = {https://www.cs.virginia.edu/~mccalpin/papers/bandwidth/bandwidth.html},
+	number = {19},
+	journaltitle = {{IEEE} computer society technical committee on computer architecture ({TCCA}) newsletter},
+	author = {{McCalpin}, John D.},
+	urldate = {2024-03-05},
+	date = {1995},
+	keywords = {⛔ No {DOI} found},
+	file = {McCalpin_1995_Memory bandwidth and machine balance in current high performance computers.pdf:C\:\\Users\\jakn\\Zotero\\storage\\TIDBVY2A\\McCalpin_1995_Memory bandwidth and machine balance in current high performance computers.pdf:application/pdf},
+}
+
+
+@article{tang_clkscrew_nodate,
+	title = {{CLKSCREW}: Exposing the Perils of Security-Oblivious Energy Management},
+	abstract = {The need for power- and energy-efﬁcient computing has resulted in aggressive cooperative hardware-software energy management mechanisms on modern commodity devices. Most systems today, for example, allow software to control the frequency and voltage of the underlying hardware at a very ﬁne granularity to extend battery life. Despite their beneﬁts, these software-exposed energy management mechanisms pose grave security implications that have not been studied before.},
+	author = {Tang, Adrian and Sethumadhavan, Simha and Stolfo, Salvatore},
+	langid = {english},
+	keywords = {⛔ No {DOI} found},
+	file = {Tang et al. - CLKSCREW Exposing the Perils of Security-Obliviou.pdf:C\:\\Users\\jakn\\Zotero\\storage\\FQ7UVYEB\\Tang et al. - CLKSCREW Exposing the Perils of Security-Obliviou.pdf:application/pdf},
+}
+
+@online{intel_corporation_intel_nodate,
+	title = {Intel {TDX} Security Advisories},
+	url = {https://github.com/intel/tdx-linux/security/advisories},
+	author = {{Intel Corporation}},
+}
+
 
 @online{j_christopher_bare_attestatopn_2006,
 	title = {Attestatopn and Trusted Computing},

@@ -42,7 +42,7 @@ Cryptography and Security Group}
 
 %% The reviewers are the professors that grade your thesis
 \reviewerone{Prof. Dr. Jörn Müller-Quade}
-\reviewertwo{Prof. B}
+\reviewertwo{Prof. Dr. Thorsten Strufe}
 
 %% The advisors are PhDs or Postdocs
 \advisorone{Jeremias Mechler, M.Sc. }
@@ -68,7 +68,7 @@ Cryptography and Security Group}
 \usepackage{listings}
 
 \usepackage{bera}
-\usepackage{xcolor}
+\usepackage[svgnames]{xcolor}
 \usepackage[T1]{fontenc}
 \usepackage{array}
 
@@ -77,6 +77,56 @@ Cryptography and Security Group}
 \definecolor{delim}{RGB}{20,105,176}
 \definecolor{black}{RGB}{0,0,0}
 \colorlet{numb}{magenta!60!black}
+
+\thispagestyle{empty}
+\usepackage{lipsum}
+\usepackage{tikz}
+\usetikzlibrary{backgrounds}
+\makeatletter
+
+\tikzset{%
+  fancy quotes/.style={
+    text width=\fq@width pt,
+    align=justify,
+    inner sep=1em,
+    anchor=north west,
+    minimum width=\linewidth,
+  },
+  fancy quotes width/.initial={.8\linewidth},
+  fancy quotes marks/.style={
+    scale=8,
+    text=white,
+    inner sep=0pt,
+  },
+  fancy quotes opening/.style={
+    fancy quotes marks,
+  },
+  fancy quotes closing/.style={
+    fancy quotes marks,
+  },
+  fancy quotes background/.style={
+    show background rectangle,
+    inner frame xsep=0pt,
+    background rectangle/.style={
+      fill=gray!25,
+      rounded corners,
+    },
+  }
+}
+
+\newenvironment{fancyquotes}[1][]{%
+\noindent
+\tikzpicture[fancy quotes background]
+\node[fancy quotes opening,anchor=north west] (fq@ul) at (0,0) {``};
+\tikz@scan@one@point\pgfutil@firstofone(fq@ul.east)
+\pgfmathsetmacro{\fq@width}{\linewidth - 2*\pgf@x}
+\node[fancy quotes,#1] (fq@txt) at (fq@ul.north west) \bgroup}
+{\egroup;
+\node[overlay,fancy quotes closing,anchor=east] at (fq@txt.south east) {''};
+\endtikzpicture}
+
+\makeatother
+
 
 \lstdefinelanguage{jsonmain}{
     basicstyle=\small\ttfamily,
@@ -112,6 +162,8 @@ Cryptography and Security Group}
   numbers=none,
 }
 \usepackage{cleveref}
+\usepackage[newfloat]{minted}
+
 
 \input{sections/glossary.tex}
 \input{sections/acronyms.tex}
@@ -181,7 +233,6 @@ Cryptography and Security Group}
 \input{sections/preliminaries}
 \input{sections/methodology}
 \input{sections/content.tex}
-\input{sections/evaluation.tex}
 \input{sections/conclusion.tex}
 \input{sections/relatedWork.tex}
 
