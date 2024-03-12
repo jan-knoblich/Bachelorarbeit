@@ -1,0 +1,275 @@
+BaselineInfo:
+  WebDBID: -1
+  TimeStamp: 20240114122858
+Version:
+  Major: 11
+  Minor: 0
+  Build: 1002
+  SpecialBuildName: ""
+  ptArchitecture: x86_64_linux
+Results:
+  Results Complete: true
+  NumTestProcesses: 224
+  CPU_INTEGER_MATH: 0
+  CPU_FLOATINGPOINT_MATH: 0
+  CPU_PRIME: 0
+  CPU_SORTING: 0
+  CPU_ENCRYPTION: 0
+  CPU_COMPRESSION: 0
+  CPU_SINGLETHREAD: 0
+  CPU_PHYSICS: 0
+  CPU_MATRIX_MULT_SSE: 0
+  CPU_mm: 0
+  CPU_sse: 0
+  CPU_fma: 0
+  CPU_avx: 0
+  CPU_avx512: 0
+  m_CPU_enc_SHA: 0
+  m_CPU_enc_AES: 0
+  m_CPU_enc_ECDSA: 0
+  ME_ALLOC_S: 33258.948753045937
+  ME_READ_S: 28148.144140625001
+  ME_READ_L: 11123.779648437499
+  ME_WRITE: 9549.9260156250002
+  ME_LARGE: 251573.05833333332
+  ME_LATENCY: 61.425051215110663
+  ME_THREADED: 411297.59497802734
+  SUMM_CPU: 0
+  SUMM_ME: 2631.8848412842422
+SystemInformation:
+  OSName: Ubuntu 22.04.3 LTS
+  Kernel: 5.19.17-mvp23v3+6-generic
+  Device: ""
+  Processor: Intel Xeon Platinum 8480CTDX
+  NumSockets: 2
+  Manufacturer: GenuineIntel
+  NumCores: 112
+  NumLogicals: 224
+  CPUFrequency: 3800
+  Memory: 256971
+  MemModuleInfo:
+    iNumMemSticks: 32
+    DIMM 1:
+      manufacturer: Samsung
+      modulePartNo: "M321R2GA3BB0-CQKVG  "
+      memType: DDR5
+      size: 16
+      clkspeed: 2400
+      moduleVoltage: 1.10000002
+    DIMM 2:
+      manufacturer: NO DIMM
+      modulePartNo: NO DIMM
+      memType: Unknown
+      size: 0
+      clkspeed: 0
+      moduleVoltage: 0
+    DIMM 3:
+      manufacturer: Samsung
+      modulePartNo: "M321R2GA3BB0-CQKVG  "
+      memType: DDR5
+      size: 16
+      clkspeed: 2400
+      moduleVoltage: 1.10000002
+    DIMM 4:
+      manufacturer: NO DIMM
+      modulePartNo: NO DIMM
+      memType: Unknown
+      size: 0
+      clkspeed: 0
+      moduleVoltage: 0
+    DIMM 5:
+      manufacturer: Samsung
+      modulePartNo: "M321R2GA3BB0-CQKVG  "
+      memType: DDR5
+      size: 16
+      clkspeed: 2400
+      moduleVoltage: 1.10000002
+    DIMM 6:
+      manufacturer: NO DIMM
+      modulePartNo: NO DIMM
+      memType: Unknown
+      size: 0
+      clkspeed: 0
+      moduleVoltage: 0
+    DIMM 7:
+      manufacturer: Samsung
+      modulePartNo: "M321R2GA3BB0-CQKVG  "
+      memType: DDR5
+      size: 16
+      clkspeed: 2400
+      moduleVoltage: 1.10000002
+    DIMM 8:
+      manufacturer: NO DIMM
+      modulePartNo: NO DIMM
+      memType: Unknown
+      size: 0
+      clkspeed: 0
+      moduleVoltage: 0
+    DIMM 9:
+      manufacturer: Samsung
+      modulePartNo: "M321R2GA3BB0-CQKVG  "
+      memType: DDR5
+      size: 16
+      clkspeed: 2400
+      moduleVoltage: 1.10000002
+    DIMM 10:
+      manufacturer: NO DIMM
+      modulePartNo: NO DIMM
+      memType: Unknown
+      size: 0
+      clkspeed: 0
+      moduleVoltage: 0
+    DIMM 11:
+      manufacturer: Samsung
+      modulePartNo: "M321R2GA3BB0-CQKVG  "
+      memType: DDR5
+      size: 16
+      clkspeed: 2400
+      moduleVoltage: 1.10000002
+    DIMM 12:
+      manufacturer: NO DIMM
+      modulePartNo: NO DIMM
+      memType: Unknown
+      size: 0
+      clkspeed: 0
+      moduleVoltage: 0
+    DIMM 13:
+      manufacturer: Samsung
+      modulePartNo: "M321R2GA3BB0-CQKVG  "
+      memType: DDR5
+      size: 16
+      clkspeed: 2400
+      moduleVoltage: 1.10000002
+    DIMM 14:
+      manufacturer: NO DIMM
+      modulePartNo: NO DIMM
+      memType: Unknown
+      size: 0
+      clkspeed: 0
+      moduleVoltage: 0
+    DIMM 15:
+      manufacturer: Samsung
+      modulePartNo: "M321R2GA3BB0-CQKVG  "
+      memType: DDR5
+      size: 16
+      clkspeed: 2400
+      moduleVoltage: 1.10000002
+    DIMM 16:
+      manufacturer: NO DIMM
+      modulePartNo: NO DIMM
+      memType: Unknown
+      size: 0
+      clkspeed: 0
+      moduleVoltage: 0
+    DIMM 17:
+      manufacturer: Samsung
+      modulePartNo: "M321R2GA3BB0-CQKVG  "
+      memType: DDR5
+      size: 16
+      clkspeed: 2400
+      moduleVoltage: 1.10000002
+    DIMM 18:
+      manufacturer: NO DIMM
+      modulePartNo: NO DIMM
+      memType: Unknown
+      size: 0
+      clkspeed: 0
+      moduleVoltage: 0
+    DIMM 19:
+      manufacturer: Samsung
+      modulePartNo: "M321R2GA3BB0-CQKVG  "
+      memType: DDR5
+      size: 16
+      clkspeed: 2400
+      moduleVoltage: 1.10000002
+    DIMM 20:
+      manufacturer: NO DIMM
+      modulePartNo: NO DIMM
+      memType: Unknown
+      size: 0
+      clkspeed: 0
+      moduleVoltage: 0
+    DIMM 21:
+      manufacturer: Samsung
+      modulePartNo: "M321R2GA3BB0-CQKVG  "
+      memType: DDR5
+      size: 16
+      clkspeed: 2400
+      moduleVoltage: 1.10000002
+    DIMM 22:
+      manufacturer: NO DIMM
+      modulePartNo: NO DIMM
+      memType: Unknown
+      size: 0
+      clkspeed: 0
+      moduleVoltage: 0
+    DIMM 23:
+      manufacturer: Samsung
+      modulePartNo: "M321R2GA3BB0-CQKVG  "
+      memType: DDR5
+      size: 16
+      clkspeed: 2400
+      moduleVoltage: 1.10000002
+    DIMM 24:
+      manufacturer: NO DIMM
+      modulePartNo: NO DIMM
+      memType: Unknown
+      size: 0
+      clkspeed: 0
+      moduleVoltage: 0
+    DIMM 25:
+      manufacturer: Samsung
+      modulePartNo: "M321R2GA3BB0-CQKVG  "
+      memType: DDR5
+      size: 16
+      clkspeed: 2400
+      moduleVoltage: 1.10000002
+    DIMM 26:
+      manufacturer: NO DIMM
+      modulePartNo: NO DIMM
+      memType: Unknown
+      size: 0
+      clkspeed: 0
+      moduleVoltage: 0
+    DIMM 27:
+      manufacturer: Samsung
+      modulePartNo: "M321R2GA3BB0-CQKVG  "
+      memType: DDR5
+      size: 16
+      clkspeed: 2400
+      moduleVoltage: 1.10000002
+    DIMM 28:
+      manufacturer: NO DIMM
+      modulePartNo: NO DIMM
+      memType: Unknown
+      size: 0
+      clkspeed: 0
+      moduleVoltage: 0
+    DIMM 29:
+      manufacturer: Samsung
+      modulePartNo: "M321R2GA3BB0-CQKVG  "
+      memType: DDR5
+      size: 16
+      clkspeed: 2400
+      moduleVoltage: 1.10000002
+    DIMM 30:
+      manufacturer: NO DIMM
+      modulePartNo: NO DIMM
+      memType: Unknown
+      size: 0
+      clkspeed: 0
+      moduleVoltage: 0
+    DIMM 31:
+      manufacturer: Samsung
+      modulePartNo: "M321R2GA3BB0-CQKVG  "
+      memType: DDR5
+      size: 16
+      clkspeed: 2400
+      moduleVoltage: 1.10000002
+    DIMM 32:
+      manufacturer: NO DIMM
+      modulePartNo: NO DIMM
+      memType: Unknown
+      size: 0
+      clkspeed: 0
+      moduleVoltage: 0
